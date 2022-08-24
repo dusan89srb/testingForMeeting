@@ -1,0 +1,67 @@
+GIT COMMANDS:
+
+git commit //obvious
+
+git branch branchName //creating new branch
+
+* shows the current branch
+
+git checkout newBranch;
+git commit   // moving to new branch and commiting
+
+git checkout -b [branchName] //creating and checking out new branch in one line
+
+git merge branchName // merging branch to main one
+
+git checkout newBranch;
+git merge main 				//merging everything
+
+git rebase branchName main   //moving work from branchName to main branch-now you are checked in main
+
+HEAD is the symbolic name for the currently checked out commit -- it's essentially what commit you're working on top of. HEAD always points to the most recent commit which is reflected in the working tree.
+Detaching HEAD just means attaching it to a commit instead of a branch.
+Doing checkout branch or commit=> HEAD is on that checkout
+change
+
+Moving upwards one commit at a time with ^
+Moving upwards a number of times with ~<num>
+So saying main^ is equivalent to "the first parent of main". git checkout branchName^ //changes HEAD to branchName parent
+using ~4 moves you 4 commits back
+
+git branch -f main HEAD~3 // moves (by force) the main branch to three parents behind HEAD
+
+git reset reverses changes by moving a branch reference backwards in time to an older commit.
+
+In order to reverse changes and share those reversed changes with others, we need to use git revert.
+
+git reset HEAD~1 //reseting to previous commit in a local branch
+git revert HEAD  //reverting to previous commit in a shared branch
+
+git cherry-pick commitNumber commitNumber2 // copying only certain commits you want from one to current selected branch~  . git cherry-pick will plop down a commit from anywhere in the tree onto HEAD (as long as that commit isn't an ancestor of HEAD)
+
+git rebase -i HEAD~4 //git will open up a UI to show you which commits are about to be copied below the target of the rebase. It also shows their commit hashes and messages. UI tool is required to reorder commits.
+
+git commit --amend //making changes/recomiting selected commit
+
+git tag v1 c1 // nameing the tag (anchor) v1 and referencing the commit C1 explicitly
+
+git describe <ref> //command to describe where you are relative to the closest "anchor" (aka tag).
+Where <ref> is anything git can resolve into a commit. If you don't specify a ref, git just uses where you're checked out right now (HEAD).
+The output of the command looks like:
+<tag>_<numCommits>_g<hash>
+Where tag is the closest ancestor tag in history, numCommits is how many commits away that tag is, and <hash> is the hash of the commit being described.
+
+git clone //cloning(simply coping all of) your current work from local to shared cloud or vice versa. default name for remote branch is remote.
+Remote branches have the special property that when you check them out, you are put into detached HEAD mode. Git does this on purpose because you can't work on these branches directly; you have to work elsewhere and then share your work with the remote (after which your remote branches will be updated).
+
+git fetch  //downloads missing commits from shared/original branch to cloned/origin branch and updates where our origin branches points to.
+
+git pull // essentially shorter for a git fetch followed by a merge of whatever branch was just fetched.
+
+git push // responsible for uploading your changes to a specified remote(originial shared branch) and updating that remote to incorporate your new commits. Make sure that checkout (HEAD) is on the last commit before pushing.
+
+git fetch //fetching (downloading) commits from remote that were added for example since cloning
+git rebase o/main // rebased our work to reflect the new changes in the remote. Same can be done with merge.
+git push // now push can work
+
+git pull --rebase // shorter pull and rebase

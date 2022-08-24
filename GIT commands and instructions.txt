@@ -1,4 +1,12 @@
+Edit directly from gitHub
+
+
+
 GIT COMMANDS:
+
+
+
+
 
 git commit //obvious
 
